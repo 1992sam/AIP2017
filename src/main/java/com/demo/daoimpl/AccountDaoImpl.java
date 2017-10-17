@@ -17,7 +17,7 @@ import com.demo.mapper.AccountQueries;
 
 public class AccountDaoImpl implements AccountDao {
 
-	//DataSource dataSource; (Spring data access interface)
+
 	
 	/**
 	 * Open connection to database.
@@ -40,12 +40,7 @@ public class AccountDaoImpl implements AccountDao {
 		return conn;
 	}
 	
-	/*public Account getAccount(Account account) {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
-		Account retrievedAccount = (Account) jdbcTemplate.queryForObject(AccountQueries.getAccount, new Object [] {account.getEmail()},new AccountMapper());
-		return retrievedAccount;
-	}
-	(Spring Implementation)*/
+	
 	
 	/**
 	 * Gets account details from database
@@ -81,16 +76,6 @@ public class AccountDaoImpl implements AccountDao {
 		return retrievedAccount;
 	}
 
-/*	public void registerAccount(Account account) {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
-		jdbcTemplate.update(AccountQueries.insertAccount, account.getFirstName(),
-				account.getLastName(),
-				account.getAddress(),
-				account.getAge(),
-				account.getEmail(),
-				account.getPassword(),
-				false);
-	}(Spring Implementation)*/
 	/**
 	 * Creates new user account in database table
 	 */
@@ -115,12 +100,6 @@ public class AccountDaoImpl implements AccountDao {
 	}
 	
 
-/*	public void deleteAccount(Account account) {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		jdbcTemplate.update(AccountQueries.deleteAccount, account.getEmail(),
-				account.getPassword());
-		
-	}(Spring Implementation)*/
 	/**
 	 * Deletes user account in database table
 	 */
@@ -141,15 +120,7 @@ public class AccountDaoImpl implements AccountDao {
 	}
 
 	
-	/*public void updateAccount(Account account) {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
-		jdbcTemplate.update(AccountQueries.updateAccount, account.getFirstName(),
-				account.getLastName(),
-				account.getAddress(),
-				account.getAge(), 
-				account.getEmail());
-		
-	}(Spring implementation)*/
+	
 	/**
 	 * Updates columns in user accounts table.
 	 */
@@ -170,10 +141,7 @@ public class AccountDaoImpl implements AccountDao {
 		}
 	}
 	
-	//Spring setters
-	/*public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}*/
+	
 
 	
 

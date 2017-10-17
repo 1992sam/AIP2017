@@ -40,14 +40,6 @@ public class EventDaoImpl implements EventDao{
 		return conn;
 	}
 	
-	/*public void createEvent(Event event) {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
-		jdbcTemplate.update(EventQueries.createEvent, event.getEventName(),
-				event.getVenue(),
-				event.getEventDate(),
-				event.getAbout(),
-				event.getTickets());
-	}*/
 	
 	public void createEvent(Event event) {
 		
@@ -72,11 +64,7 @@ public class EventDaoImpl implements EventDao{
 	}
 	
 
-/*	public Event getEvent(String eventName) {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
-		Event retrievedEvent = (Event) jdbcTemplate.queryForObject(EventQueries.getEventByName, new Object []{eventName}, new EventMapper());
-		return retrievedEvent;
-	}*/
+
 	
 	public Event getEvent(String eventName) {
 		Connection conn = getConnection();
@@ -102,11 +90,7 @@ public class EventDaoImpl implements EventDao{
 		}
 		return event;
 	}
-/*	public Event getEvent(int ID) {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
-		Event retrievedEvent = (Event) jdbcTemplate.queryForObject(EventQueries.getEventById, new Object []{ID}, new EventMapper());
-		return retrievedEvent;
-	}*/
+
 	public Event getEvent(int ID) {
 		Connection conn = getConnection();
 		Event event =  new Event();
@@ -130,11 +114,6 @@ public class EventDaoImpl implements EventDao{
 		return event;
 	}
 
-/*	public List<Event> getAllEvent() {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		List<Event> allEvents = (List<Event>) jdbcTemplate.query(EventQueries.getAllEvents,new BeanPropertyRowMapper(Event.class));
-		return allEvents;
-	}*/
 	
 	public List<Event> getAllEvent() {
 		Connection conn = getConnection();
@@ -167,11 +146,6 @@ public class EventDaoImpl implements EventDao{
 		
 	}
 	
-	/*public void deleteEvent(Event event) {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
-		jdbcTemplate.update(EventQueries.deleteEvent, event.getEventName());
-		
-	}*/
 	
 	public void deleteEvent(Event event) {
 		Connection conn = getConnection();
