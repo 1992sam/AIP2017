@@ -8,7 +8,6 @@ import com.demo.dao.OrderDao;
 import com.demo.model.Event;
 import com.demo.model.Order;
 import com.demo.model.UserEvents;
-import com.demo.model.UserEvents;
 import com.demo.service.OrderService;
 
 public class OrderServiceImpl implements OrderService {
@@ -18,15 +17,10 @@ public class OrderServiceImpl implements OrderService {
 	
 	public void createOrder(Order order) {
 		
-		if(order.getTickets() > 4) 
+		//if(order.getTickets() > 4) 
 		//TODO display that max of 4 tickets can be bought at one one by a user 
 		//do not place order
 		orderDao.createOrder(order);
-		
-	}
-
-	public void cancelOrder(Order order) {
-		orderDao.cancelOrder(order);
 		
 	}
 
@@ -35,10 +29,7 @@ public class OrderServiceImpl implements OrderService {
 		
 	}
 
-	public int cancelTickets(int numberOfTickets, String eventId) {
-		return orderDao.cancelTickets(numberOfTickets, eventId);
-				
-	}
+	
 	
 	public List<UserEvents> getMyEvents(Order order) {
 		List<Order> myOrders = orderDao.getMyEvents(order);
@@ -69,8 +60,4 @@ public class OrderServiceImpl implements OrderService {
 	public void setEventDao(EventDao eventDao) {
 		this.eventDao = eventDao;
 	}
-	
-	
-	
-
 }

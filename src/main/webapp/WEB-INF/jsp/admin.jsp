@@ -34,6 +34,8 @@
 		
 		<p align="center"><a href="deleteEvent.html">Delete an Event</a></p>
 		
+		<p align="center"><a href="deleteAccount.html">Delete an Account</a></p>
+		
 		<p align="center"><a href="userHome.html">Home</a></p>
 		
 </body>

@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-//import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Email;
 
 public class Account {
 	
@@ -17,31 +17,32 @@ public class Account {
 	@NotNull
 	@NotEmpty
     @Size(min=1, max=15, message = "First name")
-	private String firstName;
+	private String firstName; //First Name of User.
 	
 	@NotNull(message = "Last name cannot be null") 
 	@NotBlank
 	@Size(min=1, max=15)
-	private String lastName;
+	private String lastName; //Last Name of User.
 	
 	@NotNull(message = "Address cannot be null") 
 	@Size(min=1, max=100)
-	private String address;
+	private String address; //Address of User.
 	
 	//@NotNull(message = "Age cannot be null")
-	//@Min(value = 15, message = "Age should not be less than 15")
-	private int age = 15;
+	//@Min(value = 18, message = "Age should not be less than 18")
+	private int age = 18; //Age of User.
 	
 	//@javax.validation.constraints.Email(message = "Email cannot be null")
 	@NotNull @Size(min=1)
 	@Pattern(regexp="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
-	private String email = null;
+	private String email = null; //Email address of User.
 	
 	@NotNull(message = "Please enter password") @Size(min=1)
-	private String password = null;
+	private String password = null; //Password of User.
 	
-	private boolean admin;
+	private boolean admin; //Boolean to check admin status.
 	
+	//Getters and Setter.
 	public String getFirstName() {
 		return firstName;
 	}
@@ -93,7 +94,7 @@ public class Account {
 	@Override
 	public String toString() {
 		return "Account [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", age="
-				+ age + ", email=" + email + ", password=" + password + "]";
+				+ age + ", email=" + email + ", password=" + password + "]" + "admin" + admin;
 	}
 	
 

@@ -2,10 +2,11 @@ package com.demo.model;
 
 public class Login {
 	
-	private String email;
+	private String email; //Email address of User.
 	
-	private String password;
+	private String password; //Password of User.
 
+	//Getters and Setters.
 	public String getEmail() {
 		return email;
 	}

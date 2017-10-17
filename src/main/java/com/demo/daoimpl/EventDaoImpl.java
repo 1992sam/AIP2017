@@ -145,12 +145,13 @@ public class EventDaoImpl implements EventDao{
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
 				Event event =  new Event();
-				event.setId(rs.getString("Id"));
+				event.setId(rs.getString("eventId"));
 				event.setEventName(rs.getString("eventName"));
 				event.setVenue(rs.getString("venue"));
 				event.setEventDate(rs.getDate("eventDate").toString());
 				event.setAbout(rs.getString("about"));
 				event.setTickets(rs.getInt("tickets"));
+				event.toString();
 				allEvents.add(event);
 			}
 			conn.close();

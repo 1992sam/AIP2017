@@ -17,12 +17,10 @@
 				<tr><td>Last Name: </td><td><form:input path = "lastName"  />
 				<form:errors path = "lastName" /></td></tr>
 				<tr><td>Email: </td><td><form:input path = "email"  />
-				<form:errors path = "email" /></td></tr>
-				<tr><td>Password: </td><td><form:password path = "password" />
-				<form:errors path = "password" /></td></tr>
+				<</td></tr>
 				<tr> <td></td><td><input type="submit" value = "Delete"></td></tr>
 			</table>
 		</form:form>
-			<p><a href="index.html">Go Back</a></p>
+			<p><a href="admin.html">Go Back</a></p>
 	</body>
 </html>

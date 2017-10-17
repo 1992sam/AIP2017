@@ -17,8 +17,12 @@ import com.demo.mapper.AccountQueries;
 
 public class AccountDaoImpl implements AccountDao {
 
-	DataSource dataSource;
+	//DataSource dataSource; (Spring data access interface)
 	
+	/**
+	 * Open connection to database.
+	 * @return connection
+	 */
 	public Connection getConnection(){
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -40,8 +44,12 @@ public class AccountDaoImpl implements AccountDao {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
 		Account retrievedAccount = (Account) jdbcTemplate.queryForObject(AccountQueries.getAccount, new Object [] {account.getEmail()},new AccountMapper());
 		return retrievedAccount;
-	}*/
+	}
+	(Spring Implementation)*/
 	
+	/**
+	 * Gets account details from database
+	 */
 	public Account getAccount(Account account) {
 		Connection conn = getConnection();
 		Account retrievedAccount = new Account();
@@ -64,7 +72,7 @@ public class AccountDaoImpl implements AccountDao {
 			}
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TODO 
 			
 			e.printStackTrace();
 		}
@@ -80,9 +88,12 @@ public class AccountDaoImpl implements AccountDao {
 				account.getAddress(),
 				account.getAge(),
 				account.getEmail(),
-				account.getPassword());
-	}*/
-	
+				account.getPassword(),
+				false);
+	}(Spring Implementation)*/
+	/**
+	 * Creates new user account in database table
+	 */
 	public void registerAccount(Account account) {
 		Connection conn = getConnection();
 		try {
@@ -93,10 +104,11 @@ public class AccountDaoImpl implements AccountDao {
 			stmt.setInt(4, account.getAge());
 			stmt.setString(5, account.getEmail());
 			stmt.setString(6, account.getPassword());
+			stmt.setBoolean(7, false);
 			stmt.executeUpdate();
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TODO 
 			e.printStackTrace();
 		}
 		
@@ -108,8 +120,10 @@ public class AccountDaoImpl implements AccountDao {
 		jdbcTemplate.update(AccountQueries.deleteAccount, account.getEmail(),
 				account.getPassword());
 		
-	}*/
-	
+	}(Spring Implementation)*/
+	/**
+	 * Deletes user account in database table
+	 */
 	public void deleteAccount(Account account) {
 		Connection conn = getConnection();
 		try {
@@ -119,7 +133,7 @@ public class AccountDaoImpl implements AccountDao {
 			stmt.executeUpdate();
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TODO 
 			e.printStackTrace();
 		}
 		
@@ -135,8 +149,10 @@ public class AccountDaoImpl implements AccountDao {
 				account.getAge(), 
 				account.getEmail());
 		
-	}*/
-	
+	}(Spring implementation)*/
+	/**
+	 * Updates columns in user accounts table.
+	 */
 	public void updateAccount(Account account) {
 		Connection conn = getConnection();
 		try {
@@ -155,9 +171,9 @@ public class AccountDaoImpl implements AccountDao {
 	}
 	
 	//Spring setters
-	public void setDataSource(DataSource dataSource) {
+	/*public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
-	}
+	}*/
 
 	
 

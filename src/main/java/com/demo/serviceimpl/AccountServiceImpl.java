@@ -12,19 +12,25 @@ public class AccountServiceImpl implements AccountService{
 	EventDao eventDao;
 	OrderService orderService;
 	
+	/**
+	 * Create Account
+	 */
 	public void createAccount(Account account) {
 		
 			accountDao.registerAccount(account);
 		
 	}
 	
-	
-	
-	
+	/**
+	 * Get Account Details
+	 */
 	public Account getAccount(Account account) {
 		return accountDao.getAccount(account);
 	}
 	
+	/**
+	 * Log User in
+	 */
 	public Account loginAccount(Account account) {
 		Account userAccount = getAccount(account);
 	//	System.out.println(userAccount.getEmail() + "  " + userAccount.getPassword());
@@ -39,6 +45,9 @@ public class AccountServiceImpl implements AccountService{
 		
 	}
 	
+	/**
+	 * Update Account Details
+	 */
 	public void updateAccount(Account account) {
 		accountDao.updateAccount(account);
 		

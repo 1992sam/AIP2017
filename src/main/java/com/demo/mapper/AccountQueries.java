@@ -3,7 +3,7 @@ package com.demo.mapper;
 public class AccountQueries {
 
 
-		public static String insertAccount = "insert into user_accounts(firstName, lastName, address, age, email, password) values(?,?,?,?,?,?);";
+		public static String insertAccount = "insert into user_accounts(firstName, lastName, address, age, email, password,admin) values(?,?,?,?,?,?,?);";
 		
 		public static String deleteAccount = "delete from user_accounts where email = ? and password = ?;";
 		

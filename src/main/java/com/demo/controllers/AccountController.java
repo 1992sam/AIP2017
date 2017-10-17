@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,22 +26,24 @@ public class AccountController {
 	AccountService accountService;
 	EventService eventService;
 	
+	// Maps "index.html"
 	@RequestMapping(value="/index")
+	//Method to display Index Page.
 	public String displayIndexPage(){
 		return "index";
 	}
 	
-	
+	//Maps "signUp.html".
 	@RequestMapping(value="/signup")
+	//Method to create a new account.
 	public ModelAndView createAccount(@ModelAttribute ("aNewAccount") @Valid Account aNewAccount, BindingResult result){
 		ModelAndView mav = new ModelAndView();
 		String[] er = {"First Name cannot be null","Last Name cannot be empty","Address cannot be Empty",
 				"Age cannot be less than 18","Email address cannot be Empty","Email format is wrong",
 				"Password field cannot be empty","Password length cannot be less than six characters",
 				"Please enter Proper Age"};
-		System.out.println(result.toString());
-		System.out.println(aNewAccount.toString());
 		mav.setViewName("signup");
+		//Form Validation.
 		if(aNewAccount.getFirstName() == null || aNewAccount.getFirstName().isEmpty()){
 			if(aNewAccount.getFirstName() == null) {
 				mav.setViewName("signup");
@@ -115,7 +118,9 @@ public class AccountController {
 		return mav;
 	}
 	
+	//Map "login.html"
 	@RequestMapping(value="/login")
+	//Method to verify User identity.
 	public ModelAndView loginAccount(HttpServletRequest request, @ModelAttribute ("loginAccount") Login login, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
 		if(request.getSession().getAttribute("userId") != null) {
@@ -123,8 +128,7 @@ public class AccountController {
 			acc.setEmail((String)request.getSession().getAttribute("email"));
 			Account loggedAccount = accountService.getAccount(acc);
 			mav.addObject("userName", loggedAccount.getFirstName());
-			mav.setViewName("userHome");
-			return mav;
+			return new ModelAndView("redirect:/userHome.html");
 		}
 		if(login.getEmail() == null || login.getEmail().isEmpty()){
 			if(login.getEmail() == null) {
@@ -154,37 +158,56 @@ public class AccountController {
 			mav.setViewName("login");
 			return mav;
 		}
-		mav.addObject("userName", loginAccount.getFirstName());
+		
+		System.out.println(loginAccount.toString());
+		request.getSession().setAttribute("userName", loginAccount.getFirstName());
 		request.getSession().setAttribute("userId", loginAccount.getId());
 		request.getSession().setAttribute("email", loginAccount.getEmail());
-		mav.setViewName("userHome");
-		return mav;
+		request.getSession().setAttribute("admin", loginAccount.isAdmin());
+		//mav.setViewName("userHome");
+		return new ModelAndView("redirect:/userHome.html");
+		
 	}
 	
+	//Maps "editAccount.html".
 	@RequestMapping(value="/editAccount")
+	//Method to update account details.
 	public ModelAndView updateAccount(@ModelAttribute("updateAccount") Account updateAccount, BindingResult Result){
 		
-		ModelAndView mav = new ModelAndView();
-	
-	
+		ModelAndView mav = new ModelAndView();	
 		accountService.updateAccount(updateAccount);
-		mav.setViewName("editAccount");
-		
+		mav.setViewName("editAccount");		
 		return mav;
 	}
 	
+	//Maps "deleteAccount.html"
 	@RequestMapping(value = "/deleteAccount")
-	public ModelAndView deleteAccount(@ModelAttribute("deleteAnAccount") Account deleteAnAccount, BindingResult Result){
+	//Method to delete account.
+	public ModelAndView deleteAccount(@ModelAttribute("deleteAnAccount") Account deleteAnAccount, BindingResult Result, HttpServletRequest request){
+		
+		if(!(boolean)request.getSession().getAttribute("admin")){
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("userHome");
+			mav.addObject("message", "Not an Admin");
+			return mav;
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		accountService.deleteAccount(deleteAnAccount);
 		mav.setViewName("deleteAccount");
 		return mav;
 	}
 	
+	//Maps "logout.html"
 	@RequestMapping("/logout")
-	public String logout(){
-
-		return "index";
+	//Method to Log user out.
+	public ModelAndView logout(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		request.getSession().setAttribute("userId", null);
+		request.getSession().setAttribute("email", null);
+		mav.setViewName("index");
+		return mav;
+		
 	}
 
 	

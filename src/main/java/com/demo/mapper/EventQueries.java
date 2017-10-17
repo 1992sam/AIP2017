@@ -4,7 +4,7 @@ public class EventQueries {
 	
 	public static String createEvent = "insert into events(eventName, venue, eventDate, about, tickets) values(?,?,?,?,?);";
 
-	public static String getAllEvents = "select eventName from events;";
+	public static String getAllEvents = "select * from events;";
 	
 	public static String getEventByName = "select * from events where eventName = ?;";
 	

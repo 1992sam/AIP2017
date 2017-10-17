@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 
 import javax.sql.DataSource;
 
@@ -51,8 +51,8 @@ public class OrderDaoImpl implements OrderDao{
 		Connection conn = getConnection();
 		try {
 			PreparedStatement stmt = conn.prepareStatement(OrderQueries.placeOrder);
-			stmt.setString(1, order.getEventId());
-			stmt.setString(2, order.getID());
+			stmt.setInt(1, Integer.parseInt(order.getEventId()));
+			stmt.setInt(2, Integer.parseInt(order.getID()));
 			stmt.setInt(3, order.getTickets());
 			int rs = stmt.executeUpdate();
 			conn.close();
@@ -66,32 +66,12 @@ public class OrderDaoImpl implements OrderDao{
 	
 	
 
-	/*public void cancelOrder(Order order) {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
-		jdbcTemplate.update(OrderQueries.bookTickets, order.getOrderId());
-		
-	}*/
-	
-	public int cancelOrder(Order order) {
-		Connection conn = getConnection();
-		try {
-			PreparedStatement stmt = conn.prepareStatement(OrderQueries.cancelOrder);
-			stmt.setInt(1, order.getOrderId());
-			int rs = stmt.executeUpdate();
-			conn.close();
-			return rs;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return 0;
-	}
-
 	/*public void bookTickets(int numberOfTickets, String eventId) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
 		jdbcTemplate.update(OrderQueries.bookTickets, numberOfTickets, eventId);
-	}*/
+	}(Spring Implementation)*/
 	
+	//Reduce number of tickets from Events table.
 	public void bookTickets(int numberOfTickets, String eventId) {
 		Connection conn = getConnection();
 		try {
@@ -106,27 +86,8 @@ public class OrderDaoImpl implements OrderDao{
 		}
 	}
 
-	/*public void cancelTickets(int numberOfTickets, String eventId) {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource); 
-		jdbcTemplate.update(OrderQueries.cancelTickets, numberOfTickets, eventId);
-		
-	}*/
 	
-	public int cancelTickets(int numberOfTickets, String eventId) {
-		Connection conn = getConnection();
-		try {
-			PreparedStatement stmt = conn.prepareStatement(OrderQueries.cancelTickets);
-			stmt.setInt(1, numberOfTickets);
-			stmt.setString(2, eventId);
-			int rs = stmt.executeUpdate();
-			conn.close();
-			return rs;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return 0;
-	}
+	
 	/*public List<Order> getMyEvents(Order order) {
 		System.out.println(order.getID());
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -144,14 +105,11 @@ public class OrderDaoImpl implements OrderDao{
 			 
 			 retrievedOrder.toString();
 		 }
-		
-		
-		
-		
 		return myOrders;
 		
-	}*/
+	}(Spring Implementation)*/
 	
+	//Get a List of orders associated with the account.
 	public List<Order> getMyEvents(Order order){
 		List<Order> myOrders = new ArrayList<Order>();
 		Connection conn = getConnection();

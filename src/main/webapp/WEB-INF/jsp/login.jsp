@@ -23,7 +23,5 @@
 		<p>${emailError}</p><p>${passwordError}</p><p>${loginError}</p>
 		<br><br> Do not have an account??<br>
 		<a href = "signup.html">Sign up for a new account</a>
-		<br><br> Want to delete your Account??<br>
-		<a href = "deleteAccount.html">Delete your Account</a>
 	</body>
 </html>
